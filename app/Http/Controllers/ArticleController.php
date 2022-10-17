@@ -36,7 +36,14 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        return view('articles.store');
+        $article = new Article();
+
+        $article->title = $request->title;
+        $article->body = $request->body;
+
+        $article->save();
+        return redirect()->route('articles.index');
+
     }
 
     /**
@@ -70,7 +77,12 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+                $article->title = $request->title;
+                $article->body = $request->body;
+
+                $article->save();
+
+                return redirect()->route('articles.index');
     }
 
     /**
@@ -81,6 +93,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 }
